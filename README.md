@@ -28,11 +28,9 @@ Or install it yourself as:
 
 to use the Airvend Gem, you need to instantiate the Airvend class with your credentials including your Username, Password & API Key. Best practice requires you to add your credentials to your Environment Variables `AIRVEND_USERNAME`, `AIRVEND_PASSWORD` & `AIRVEND_API_KEY`. You can call the new method on the Airvend Class afterwards
 
-~~~ruby
 ```ruby
 airvend = Airvend.new
 ```
-~~~
 
 you can also call the class with your credentials without Environment Variables pre set
 
