@@ -74,6 +74,12 @@ payload =  {
 }
 ```
 
+Next, we call the method to process the airtime purchase as shown below
+
+```ruby
+airtime.buy(payload)
+```
+
 
 
 ## Development
