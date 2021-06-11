@@ -1,6 +1,6 @@
 # Airvend Ruby
 
-This gem makes it easy for businesses to implement vending of Airtime, Data, Electricity, Utilities & Television subscriptions via the [Airvend](https://airvend.ng) API
+This gem makes it easy for businesses or individuals to implement vending of Airtime, Data, Electricity, Utilities & Television subscriptions to their application. This is a simplifiication of the [Airvend](https://airvend.ng) API
 
 ### Documentation
 
