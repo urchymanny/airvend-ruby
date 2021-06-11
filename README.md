@@ -89,7 +89,7 @@ airtime.buy(payload)
 
 To vend Internet data subscriptions, you need to instantiate the `InternetData` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
-## coming soon
+##  # coming soon
 
 
 
@@ -97,7 +97,7 @@ To vend Internet data subscriptions, you need to instantiate the `InternetData` 
 
 To vend Electricity Bills, you need to instantiate the `Power` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
-## coming soon
+##  # coming soon
 
 
 
@@ -105,9 +105,11 @@ To vend Electricity Bills, you need to instantiate the `Power` Class with the [`
 
 To vend TV Subscriptions like DStv & GoTv, you need to instantiate the `TV` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
-## coming soon
+##  # coming soon
 
+  
 
+  
 
 ## Development
 
