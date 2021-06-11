@@ -46,9 +46,16 @@ Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` i
 
 ## Airvend Objects
 
-- [Airtime Transactions - VEND::Airtime.new(airvend)](#airtime-transactions)
+- VEND
+  - [Airtime Vending - VEND::Airtime.new(airvend)](#airtime-transactions)
 
-## Airtime Transactions
+# VEND
+
+## Airtime Vending
+
+
+
+to purchase 
 
 
 
