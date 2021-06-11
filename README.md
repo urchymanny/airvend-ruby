@@ -48,6 +48,9 @@ Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` i
 
 - [VEND](#vend)
   - [Airtime Vending - VEND::Airtime.new(airvend)](#airtime-vending)
+  - [Internet Data Vending - VEND::InternetData.new(airvend)](#internet-data-vending)
+  - [Electricity Vending - VEND::Power.new(airvend)](#electricity-vending)
+  - [TV Vending](#tv-vending)
 
 # VEND
 
@@ -82,6 +85,30 @@ airtime.buy(payload)
 
 
 
+## Internet Data Vending
+
+To vend Internet data subscriptions, you need to instantiate the `InternetData` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+
+## coming soon
+
+
+
+## Electricity Vending
+
+To vend Electricity Bills, you need to instantiate the `Power` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+
+## coming soon
+
+
+
+## TV Vending
+
+To vend TV Subscriptions like DStv & GoTv, you need to instantiate the `TV` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+
+## coming soon
+
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -90,7 +117,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/airvend. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/airvend/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/urchymanny/airvend-rails. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/urchymanny/airvend-rails/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -98,5 +125,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Airvend project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/airvend/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Airvend project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/urchymanny/airvend-rails/blob/master/CODE_OF_CONDUCT.md).
 
