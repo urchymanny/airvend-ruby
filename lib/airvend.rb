@@ -24,13 +24,23 @@ class Airvend
     sandbox_url = BASE_ENDPOINTS::SANDBOX_URL
     live_url = BASE_ENDPOINTS::LIVE_URL
 
+    if (ENV['RAILS_ENV'].nil?)
+      @production = production
+      warn "Warning: To ensure your account credentials are safe, It is best to always set your password in the environment variable with AIRVEND_USERNAME & AIRVEND_PASSWORD"
+    else
+      if ENV['RAILS_ENV'] == "production"
+        @production=true
+      else
+        @prodcution=false
+      end
+    end
+
     # set rave url to sandbox or live if we are in production or development
     if production == false
         @url = sandbox_url
     else
         @url = live_url
     end
-
 
     # check if we set our public and secret keys to the environment variable
     if (username.nil? && password.nil?)
