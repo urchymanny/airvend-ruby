@@ -46,18 +46,33 @@ Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` i
 
 ## Airvend Objects
 
-- VEND
-  - [Airtime Vending - VEND::Airtime.new(airvend)](#airtime-transactions)
+- [VEND](#vend)
+  - [Airtime Vending - VEND::Airtime.new(airvend)](#airtime-vending)
 
 # VEND
 
+To vend different services, you have access to the different classes for the different services
+
 ## Airtime Vending
 
+To vend airtime, you need to instantiate the Airtime Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
+```ruby
+airtime = Vend::Airtime.new(airvend)
+```
 
-to purchase 
+To purchase airtime for a phone number that is registered with any of the NCC licensed mobile networks `MTN`, `GLO`, `AIRTEL`, `9MOBILE` you can utilize the method below
 
+First, we need to provide the required data in the payload
 
+```ruby
+payload =  { 
+	ref: "YOUR-OWN-REF-HERE", 
+	account: "08138236694", 
+	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
+	amount: "200"
+}
+```
 
 
 
