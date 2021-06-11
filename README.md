@@ -28,7 +28,7 @@ Or install it yourself as:
 
 #### Instantiate Airvend object in sandbox with environment variable:
 
-to use the Airvend Gem, you need to instantiate the Airvend class with your credentials including your Username, Password & API Key. Best practice requires you to add your credentials to your Environment Variables `AIRVEND_USERNAME`, `AIRVEND_PASSWORD` & `AIRVEND_API_KEY`. You can call the new method on the Airvend Class afterwards
+To use the Airvend Gem, you need to instantiate the Airvend class with your credentials including your Username, Password & API Key. Best practice requires you to add your credentials to your Environment Variables `AIRVEND_USERNAME`, `AIRVEND_PASSWORD` & `AIRVEND_API_KEY`. You can call the new method on the Airvend Class afterwards
 
 ```ruby
 airvend = Airvend.new
@@ -40,7 +40,17 @@ you can also call the class with your credentials without Environment Variables 
 airvend = Airvend.new("YOUR-AIRVEND-USERNAME", "YOUR-AIRVEND-PASSWORD", "YOUR-AIRVEND-API-KEY")
 ```
 
-Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` if the username, password or API key is missing or invalid
+Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` if the username, password or API key is missing or invalid respectively.
+
+#### NOTE: It is best practice to always set your API keys to your environment variable for security purpose. Please be warned not use this package without setting your API keys in your environment variables in production.
+
+## Airvend Objects
+
+- Airtime Transactions - [VEND::Airtime.new(airvend)](#)
+
+
+
+## `Airtime Transactions`
 
 ## Development
 
