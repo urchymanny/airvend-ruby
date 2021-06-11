@@ -1,201 +1,92 @@
 # frozen_string_literal: true
 
-require_relative "airvend/version"
-module Airvend
-  attr_reader :public_key, :private_key
+# require_relative "airvend/version"
+require "dotenv"
+require 'json'
+require 'digest'
+require 'airvend/vend.rb'
+require 'airvend/base_endpoints.rb'
+require 'airvend/errors.rb'
+require 'airvend/upper_case_string.rb'
+require 'airvend/airvend_objects/airtime.rb'
 
-  class Vend
-    def airtime(txref, phone, mno_id, amount)
-      params_hash = { "ref" => txref, "account" => phone, "networkid" => mno_id, "type" => "1", "amount" => amount }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      resp = vendAdapter(api_hash, details)
-      if resp.status == 200
-        logResponse(resp)
-        resp
-      else
-        raise "An error with this response code #{resp.status} has occurred. Response: #{resp.body}"
-      end
+Dotenv.load(File.expand_path("../.env", __FILE__))
+
+class Airvend
+  attr_accessor :username, :password, :api_key, :production, :url
+
+  def initialize(username=nil, password=nil, api_key=nil, production=false)
+
+    @username = username
+    @password = password
+    @api_key = api_key
+    @production = production
+    sandbox_url = BASE_ENDPOINTS::SANDBOX_URL
+    live_url = BASE_ENDPOINTS::LIVE_URL
+
+    # set rave url to sandbox or live if we are in production or development
+    if production == false
+        @url = sandbox_url
+    else
+        @url = live_url
     end
 
-    def data(txref, phone, mno_id, amount)
-      params_hash = { "ref" => txref, "account" => phone, "networkid" => mno_id, "type" => "2", "amount" => amount }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      resp = vendAdapter(api_hash, details)
-      if resp.status == 200
-        logResponse(resp)
-        resp
-      else
-        raise "An error with this response code #{resp.status} has occurred. Response: #{resp.body}"
-      end
+
+    # check if we set our public and secret keys to the environment variable
+    if (username.nil? && password.nil?)
+      @username = ENV['AIRVEND_USERNAME']
+      @password = ENV['AIRVEND_PASSWORD']
+    else
+      @username = username
+      @password = password
+      warn "Warning: To ensure your account credentials are safe, It is best to always set your password in the environment variable with AIRVEND_USERNAME & AIRVEND_PASSWORD"
     end
 
-    def payTv(txref, account, provider_id, amount)
-      customernumber = verify(provider_id, account)["customernumber"].to_s
-      params_hash = { "ref" => txref, "account" => account, "type" => provider_id, "amount" => amount,
-                      "customernumber" => customernumber, "invoicePeriod" => "1" }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      resp = vendAdapter(api_hash, details)
-      if resp.status == 200
-        logResponse(resp)
-        resp
-      else
-        raise "An error with this response code #{resp.status} has occurred. Response: #{resp.body}"
-      end
+    # raise this error if no username is passed
+    unless !@username.nil?
+      raise AirvendBadUserError, "No Username supplied and couldn't find any in environment variables. Make sure to set public key as an environment variable AIRVEND_USERNAME"
     end
 
-    def power(txref, account, provider_id, amount, cus_number)
-      params_hash = { "ref" => txref, "account" => account, "type" => provider_id, "amount" => amount,
-                      "customernumber" => cus_number }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      resp = vendAdapter(api_hash, details)
-      if resp.status == 200
-        logResponse(resp)
-        resp
-      else
-        raise "An error with this response code #{resp.status} has occurred. Response: #{resp.body}"
-      end
+    # raise this error if no password is passed
+    unless !@password.nil?
+      raise AirvendBadPassError, "No password supplied and couldn't find any in environment variables. Make sure to set secret key as an environment variable AIRVEND_PASSWORD"
     end
 
-    def utility(txref, account, provider_id, amount, code)
-      params_hash = { "ref" => txref, "account" => account, "type" => provider_id, "amount" => amount, "code" => code }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      begin
-        response = vendAdapter(api_hash, details)
-      rescue StandardError
-        "error"
-      else
-        logResponse(response)
-        response
-      end
+
+    if (api_key.nil?)
+      @api_key = ENV['AIRVEND_API_KEY']
+    else
+      @api_key = api_key
+      warn "Warning: To ensure your account key is safe, It is best to always set your password in the environment variable with AIRVEND_API_KEY"
     end
 
-    def get_transaction(transaction_id)
-      params_hash = { "transactionid" => transaction_id }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      begin
-        response = transactionAdapter(api_hash, details)
-      rescue StandardError
-        "error"
-      else
-        logResponse(response)
-        JSON.parse(response.body)["details"]["message"]
-      end
-    end
-
-    def products(product_id, product_type)
-      params_hash = { "networkid" => product_id, "type" => product_type }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      begin
-        response = productAdapter(api_hash, details)
-      rescue StandardError
-        "error"
-      else
-        logResponse(response)
-        JSON.parse(response.body)["details"]["message"]
-      end
-    end
-
-    def verify(product_type, account_id)
-      params_hash = { "type" => product_type, "account" => account_id }
-      details = {}
-      details.merge!({ "details" => params_hash })
-      api_hash = hash_req(details, ENV["AIRVEND_API_KEY"])
-      begin
-        response = verifyAdapter(api_hash, details)
-      rescue StandardError
-        "error"
-      else
-        logResponse(response)
-        if response.status == 200
-          JSON.parse(response.body)["details"]["message"]
-
-        else
-          raise "Service is unavailable"
-        end
-      end
-    end
-
-    def hash_req(details, apikey)
-      api_hash = details.to_json + apikey
-      Digest::SHA512.hexdigest api_hash
-    end
-
-    def headers(hashkey)
-      {
-        UpperCaseString.new("Content-Type") => "application/json",
-        UpperCaseString.new("username") => ENV["AIRUID"],
-        UpperCaseString.new("password") => ENV["AIRPASS"],
-        UpperCaseString.new("hash") => hashkey,
-        user_agent: "Airvend 1.0"
-      }
-    end
-
-    def vendAdapter(api_hash, details)
-      conn = faradayInit(api_hash)
-      conn.post do |req|
-        req.url "/secured/seamless/vend/"
-        req.headers["hash"] = api_hash
-        req.body = details.to_json
-      end
-    end
-
-    def productAdapter(api_hash, details)
-      conn =	faradayInit(api_hash)
-      conn.post do |req|
-        req.url "/secured/seamless/products/"
-        req.headers["hash"] = api_hash
-        req.body = details.to_json
-      end
-    end
-
-    def verifyAdapter(api_hash, details)
-      conn =	faradayInit(api_hash)
-      conn.post do |req|
-        req.url "/secured/seamless/verify/"
-        req.headers["hash"] = api_hash
-        req.body = details.to_json
-      end
-    end
-
-    def transactionAdapter(api_hash, details)
-      conn =	faradayInit(api_hash)
-      conn.post do |req|
-        req.url "/secured/seamless/transaction/"
-        req.headers["hash"] = api_hash
-        req.body = details.to_json
-      end
-    end
-
-    def faradayInit(api_hash)
-      Faraday.new(url: ENV["AIRVEND_API"], headers: headers(api_hash)) do |faraday|
-        faraday.request :url_encoded
-        faraday.response :detailed_logger
-        faraday.adapter  :typhoeus
-      end
-    end
-
-    def logResponse(response)
-      if response.status == 200
-        print "Was Successful, Ok"
-      elsif response.status.between?(500, 505)
-        print "----- #{response.status} The Problem is from us, please try again later -----"
-      elsif response.status.between?(400, 417)
-        print "----- #{response.status} Check the data you want to subscribe -----"
-      end
+    # raise this error if no username is passed
+    unless !@api_key.nil?
+      raise AirvendBadKeyError, "No Api Key supplied and couldn't find any in environment variables. Make sure to set public key as an environment variable AIRVEND_USERNAME"
     end
   end
+
+  # method to return the base url
+  def base_url
+    return url
+  end
+
+  def headers(hashkey)
+    return {
+    	UpperCaseString.new('Content-Type') => 'application/json',
+      UpperCaseString.new('username') => self.username,
+      UpperCaseString.new('password') => self.password,
+      UpperCaseString.new('hash') => hashkey,
+      user_agent: "Airvend-0.1.0"
+    }
+  end
+
+  def hash_req(details)
+    api_hash = details.to_json+self.api_key
+    api_hash = Digest::SHA512.hexdigest api_hash
+    return api_hash
+  end
+
+
+
 end

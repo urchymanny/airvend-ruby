@@ -30,7 +30,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_development_dependency 'dotenv-rails'
+  spec.add_development_dependency 'byebug'
+  spec.add_dependency 'httparty', '0.16.4'
+  spec.add_dependency 'json'
+  spec.add_dependency 'faraday', '1.4.1'
+  spec.add_dependency 'faraday-detailed_logger', '2.3.0'
+  spec.add_dependency 'typhoeus', '1.4.0'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
