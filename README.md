@@ -47,10 +47,10 @@ Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` i
 ## Airvend Objects
 
 - [VEND](#vend)
-  - [Airtime Vending - VEND::Airtime.new(airvend)](#airtime-vending)
-  - [Internet Data Vending - VEND::InternetData.new(airvend)](#internet-data-vending)
-  - [Electricity Vending - VEND::Power.new(airvend)](#electricity-vending)
-  - [TV Vending](#tv-vending)
+  - [Airtime Vending - Vend::Airtime.new(airvend)](#airtime-vending)
+  - [Internet Data Vending - Vend::InternetData.new(airvend)](#internet-data-vending)
+  - [Electricity Vending - Vend::Power.new(airvend)](#electricity-vending)
+  - [TV Vending - Vend::Television](#tv-vending)
 
 # VEND
 
@@ -171,7 +171,7 @@ To get the customer details, use the `verify` method
 customer = power.verify(payload)
 ````
 
-Finally, to purchase power for the verified customer, you would prepare a payload
+Finally, to purchase power for the verified customer, you would prepare a payload using the customer number that is gotten from the `verify` method 
 
 ``` ruby
 payload =  {
@@ -191,17 +191,40 @@ next, to process the power purchase, use the method below on the provided payloa
 power.buy(payload)
 ```
 
-
-
-##  # coming soon
-
-
-
 ## TV Vending
 
-To vend TV Subscriptions like DStv & GoTv, you need to instantiate the `TV` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+To vend TV Subscriptions like DStv & GoTv, you need to instantiate the `Television` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
-##  # coming soon
+``` ruby
+tv = Vend::Television
+```
+
+Before paying for TV subscriptions, it's important to confirm the customers details before proceeding
+
+``` ruby
+payload = {
+  provider: "dstv",
+  account: "4623484245"
+}
+```
+
+To get the customer details, use the `verify` method
+
+``` ruby
+customer = tv.verify(payload)
+```
+
+&nbsp;
+
+Also, for processing TV Subscriptions, customers would be interested in selecting a subscription plan from their provider. You can get a list of available plans from each specific subscriber
+
+``` ruby
+tv_plans = tv.plans("dstv") # can also be `gotv`
+```
+
+
+
+
 
 &nbsp;
 

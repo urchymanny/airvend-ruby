@@ -90,13 +90,14 @@ class Base
 	end
 
   def mno_id(mno)
-    if mno == "mtn"
+    case mno.downcase
+    when "mtn"
       2
-    elsif mno == "airtel"
+    when "airtel"
       1
-    elsif mno == "glo"
+    when "glo"
       3
-    elsif mno == "9mobile"
+    when "9mobile"
       4
     else
       raise AirvendInvalidProvider, "Invalid Mobile Network Operator, mno can only be 'mtn', 'glo', 'airtel' or '9mobile'"
@@ -104,7 +105,7 @@ class Base
   end
 
   def provider_id(mno)
-    case mno
+    case mno.downcase
     when "mtn"
       2
     when "airtel"
@@ -159,6 +160,21 @@ class Base
       elsif y == "PREPAID"
         return "11"
       end
+    else
+      raise AirvendInvalidProvider, "Invalid Power Provider, see documentation: https://github.com/urchymanny/airvend-ruby#electricity-vending"
+    end
+  end
+
+  def tv_id(provider)
+    case provider.downcase
+    when "dstv"
+      30
+    when "gotv"
+      40
+    when "startimes"
+      70
+    else
+      raise AirvendInvalidProvider, "Invalid Power Provider, see documentation: https://github.com/urchymanny/airvend-ruby#electricity-vending"
     end
   end
 end
