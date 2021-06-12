@@ -126,7 +126,7 @@ payload =  {
 	phone: "08138236694", 
 	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
 	code: "200" # this is code from the selected internet data plan from the list of data plans 
-}
+  }
 ```
 
 then we can proceed to make subscription after charging customer or your app user
