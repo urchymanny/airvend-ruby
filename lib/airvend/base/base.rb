@@ -51,7 +51,7 @@ class Base
   end
 
   def get_plans(provider, product_type)
-    params_hash = { 'networkid'=> provider_id(provider), 'type'=> product_type }
+    params_hash = { 'networkid'=> provider, 'type'=> product_type }
 		details = {}
 		details.merge!({ 'details'=>params_hash })
 		api_hash = @airvendObj.hash_req(details)

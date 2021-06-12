@@ -20,7 +20,7 @@ class Vend::Power < Base
 
   def verify(payload)
     product_type = power_id(payload[:provider], payload[:account_type])
-    verify_customer(product_type, payload[:account])
+    verify_customer(product_type, payload[:account])[:details][:message]
   end
 
 end

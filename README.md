@@ -195,6 +195,18 @@ To get the customer details, use the `verify` method
 customer = power.verify(payload)
 ````
 
+which returns:
+
+``` ruby
+{
+  :name=>"OLUWAFEMI ODIGIE",
+  :accountstatus=>"OPEN",
+  :customernumber=>"BA36F4AEF88763454678BF9D1A85E4AE6F166CECA01DE4B58C1100DA3DA87362A6CBD3410E2B7F809C1A33E1AD6756BBA853F4C0275270B398BC69E8AC050E75|eyJwcm9kdWN0IjoiUE9SVEhBUkNPVVJURUxFQ1RSSUNJVFkiLCJ0eXBlIjoiUFJFUEFJRCIsImFjY291bnQiOiIwMTI0MDAxMjQ3Njk5IiwibmFtZSI6IkVzIE9tYWNoaSIsImFkZHJlc3MiOiJOTyA2NSBXb2ppIFJkIE5PIDY1IFdvamkgUmQiLCJ0YXJyaWYiOiJSMiIsImFycmVhcnMiOiIwIiwicGhvbmUiOiIiLCJtZXRlck51bWJlciI6IjAxMjQwMDEyNDc2OTkiLCJjdXN0b21lck51bWJlciI6IjgxNDE3MDIyODMwMSIsInRvdGFsQmlsbCI6IjAiLCJpYmNOYW1lIjoiR2FyZGVuIENpdHkgSW5kdXN0cmlhbCIsImJzY05hbWUiOiJSdW11b2diYSJ9",
+  :account=>"7021959296"
+  :customeraccounttype=>""
+}
+```
+
 &nbsp;
 
 Finally, to purchase power for the verified customer, you would prepare a payload using the customer number that is gotten from the `verify` method 
@@ -236,7 +248,7 @@ Before paying for TV subscriptions, it's important to confirm the customers deta
 ``` ruby
 payload = {
   provider: "dstv",
-  account: "4623484245"
+  account: "7021959296" # customer decoder iuc number
 }
 ```
 
@@ -248,6 +260,17 @@ To get the customer details, use the `verify` method
 customer = tv.verify(payload)
 ```
 
+which returns:
+
+``` ruby
+{
+  :name=>"OLUWAFEMI ODIGIE",
+  :accountstatus=>"OPEN",
+  :customernumber=>56920080,
+  :account=>"7021959296"
+}
+```
+
 &nbsp;
 
 Also, for processing TV Subscriptions, customers would be interested in selecting a subscription plan from their provider. You can get a list of available plans from each specific subscriber
@@ -256,9 +279,19 @@ Also, for processing TV Subscriptions, customers would be interested in selectin
 tv_plans = tv.plans("dstv") # can also be `gotv`
 ```
 
+This return an array of hashes with each containing a tv plans in the format
 
-
-
+```ruby
+[
+  ...
+  {
+    :description=>"DStv Compact",
+    :amount=> "7900", 
+    :code=>"COMPE36"
+	}
+  ...
+]
+```
 
 &nbsp;
 

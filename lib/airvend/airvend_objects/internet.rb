@@ -19,7 +19,7 @@ class Vend::Internet < Base
 	end
 
   def plans(provider)
-    data = serialize_plans(get_plans(provider, "2")[:details][:message])
+    data = serialize_plans(get_plans(provider_id(provider), "2")[:details][:message])
   end
 
   def serialize_plans(plans)
