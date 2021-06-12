@@ -34,6 +34,8 @@ To use the Airvend Gem, you need to instantiate the Airvend class with your cred
 airvend = Airvend.new
 ```
 
+&nbsp;
+
 you can also call the class with your credentials without Environment Variables pre set
 
 ```ruby
@@ -43,6 +45,8 @@ airvend = Airvend.new("YOUR-AIRVEND-USERNAME", "YOUR-AIRVEND-PASSWORD", "YOUR-AI
 Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` if the username, password or API key is missing or invalid respectively.
 
 #### NOTE: It is best practice to always set your API keys to your environment variable for security purpose. Please be warned not use this package without setting your API keys in your environment variables in production.
+
+&nbsp;
 
 ## Airvend Objects
 
@@ -56,6 +60,8 @@ Expect a `AirvendBadUserError`, `AirvendBadPassError`, or `AirvendBadKeyError` i
 
 To vend different services, you have access to the different classes for the different services
 
+&nbsp;
+
 ## Airtime Vending
 
 To vend airtime, you need to instantiate the Airtime Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
@@ -63,6 +69,8 @@ To vend airtime, you need to instantiate the Airtime Class with the [`airvend`](
 ```ruby
 airtime = Vend::Airtime.new(airvend)
 ```
+
+&nbsp;
 
 To purchase airtime for a phone number that is registered with any of the NCC licensed mobile networks `MTN`, `GLO`, `AIRTEL`, `9MOBILE` you can utilize the method below
 
@@ -76,6 +84,8 @@ payload =  {
 	amount: "200"
 }
 ```
+
+&nbsp;
 
 Next, we call the method to process the airtime purchase as shown below
 
@@ -93,6 +103,8 @@ To vend Internet data subscriptions, you need to instantiate the `Internet` Clas
 internet = Vend::Internet.new(airvend)
 ```
 
+&nbsp;
+
 To purchase internet data for a phone number that is registered with any of the NCC licensed mobile networks `MTN`, `GLO`, `AIRTEL`, `9MOBILE` you can utilize the method below
 
 First, we need to fetch a list of available internet data plans for the selected mobile network with the payload
@@ -101,7 +113,9 @@ First, we need to fetch a list of available internet data plans for the selected
 internet_plans = internet.plans("mtn") # can also be `glo`, `airtel` or `9mobile`
 ```
 
- This return an array of hashes with each containing a data plan in the format
+ &nbsp;
+
+This return an array of hashes with each containing a data plan in the format
 
 ```ruby
 [
@@ -118,6 +132,8 @@ internet_plans = internet.plans("mtn") # can also be `glo`, `airtel` or `9mobile
 
 #### Note the `code` is an identifier for the plan and is different from the amount
 
+&nbsp;
+
 Next, you can proceed to purchase the selected internet data plan with the payload
 
 ```ruby
@@ -128,6 +144,8 @@ payload =  {
 	code: "200" # this is code from the selected internet data plan from the list of data plans 
   }
 ```
+
+&nbsp;
 
 then we can proceed to make subscription after charging customer or your app user
 
@@ -145,6 +163,8 @@ To vend Electricity Bills, you need to instantiate the `Power` Class with the [`
 power = Vend::Power.new(airvend)
 ```
 
+&nbsp;
+
 Before paying for electricity bills, it's important to confirm the customers details before proceeding
 
 ```ruby
@@ -154,6 +174,8 @@ payload = {
   account_type: "prepaid" # can also be "postpaid"
 }
 ```
+
+&nbsp;
 
 the following providers are supported:
 
@@ -165,11 +187,15 @@ the following providers are supported:
 - `kedco` for Kaduna Electricity Distribution Company
 - `ibedc` for Ibadan Electricity Distribution Company
 
+&nbsp;
+
 To get the customer details, use the `verify` method
 
 ````ruby
 customer = power.verify(payload)
 ````
+
+&nbsp;
 
 Finally, to purchase power for the verified customer, you would prepare a payload using the customer number that is gotten from the `verify` method 
 
@@ -185,6 +211,8 @@ payload =  {
 
 The `customer_number` is contained in the response from the `verify` method
 
+&nbsp;
+
 next, to process the power purchase, use the method below on the provided payload
 
 ```ruby
@@ -199,6 +227,8 @@ To vend TV Subscriptions like DStv & GoTv, you need to instantiate the `Televisi
 tv = Vend::Television
 ```
 
+&nbsp;
+
 Before paying for TV subscriptions, it's important to confirm the customers details before proceeding
 
 ``` ruby
@@ -207,6 +237,8 @@ payload = {
   account: "4623484245"
 }
 ```
+
+&nbsp;
 
 To get the customer details, use the `verify` method
 
