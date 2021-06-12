@@ -174,12 +174,11 @@ customer = power.verify(payload)
 Finally, to purchase power for the verified customer, you would prepare a payload
 
 ``` ruby
-payload =  { 
-	ref: "YOUR-OWN-REF-HERE", 
+payload =  {ref: "YOUR-OWN-REF-HERE",
 	account: "02188019141", 
 	provider: "aedc",
-  amount: "2000",
-  customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6..."
+	amount: "2000",
+	customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6..."
 }
 ```
 
