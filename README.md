@@ -71,7 +71,7 @@ First, we need to provide the required data in the payload
 ```ruby
 payload =  { 
 	ref: "YOUR-OWN-REF-HERE", 
-	account: "08138236694", 
+	phone: "08138236694", 
 	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
 	amount: "200"
 }
@@ -87,7 +87,55 @@ airtime.buy(payload)
 
 ## Internet Data Vending
 
-To vend Internet data subscriptions, you need to instantiate the `InternetData` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+To vend Internet data subscriptions, you need to instantiate the `Internet` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
+
+```ruby
+internet = Vend::Internet.new(airvend)
+```
+
+To purchase internet data for a phone number that is registered with any of the NCC licensed mobile networks `MTN`, `GLO`, `AIRTEL`, `9MOBILE` you can utilize the method below
+
+First, we need to fetch a list of available internet data plans for the selected mobile network with the payload
+
+```ruby
+internet_plans = internet.plans("mtn") # can also be `glo`, `airtel` or `9mobile`
+```
+
+ This return an array of hashes with each containing a data plan in the format
+
+```ruby
+[
+  ...
+  {
+    :description=>"350MB", 
+    :amount=>"300", 
+    :code=>"300", 
+    :validity=>" for 7 Days"
+	}
+  ...
+]
+```
+
+#### Note the `code` is an identifier for the plan and is different from the amount
+
+Next, you can proceed to purchase the selected internet data plan with the payload
+
+```ruby
+payload =  { 
+	ref: "YOUR-OWN-REF-HERE", 
+	phone: "08138236694", 
+	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
+	code: "200" # this is code from the selected internet data plan from the list of data plans 
+}
+```
+
+then we can proceed to make subscription after charging customer or your app user
+
+```ruby
+internet.buy(payload)
+```
+
+
 
 ##  # coming soon
 

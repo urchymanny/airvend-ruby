@@ -8,12 +8,13 @@ class Vend::Airtime < Base
 		details = {}
 		details.merge!({ 'details'=>params_hash })
 		api_hash = @airvendObj.hash_req(details)
-		resp = vendAdapter(api_hash, details)
-		if resp.status == 200
-				logResponse(resp)
-        return resp
+		response = vendAdapter(api_hash, details)
+		if response.status == 200
+      hash = rename_hash(JSON.parse(response.body, { symbolize_names: true }))
+      rename_hash(hash[:details])
+      hash
     else
-        raise "An error with this response code #{resp.status} has occurred. Response: #{resp.body}"
+      produce_error(response)
     end
 	end
 
@@ -23,5 +24,5 @@ end
 # input = [ref: "usdibisdbsidbsd", mno = "MTN", amount]
 # Dotenv.load(File.expand_path("../.env", __FILE__))
 # a = Airvend.new
-# airtime = Vend::Airtime.new(a)
+# airtime = Vend::Airtime.new(Airvend.new)
 # payload =  { ref: "YOUR-OWN-REF-HERE", account: "08138236694", mno: "mtn", amount: "200"}

@@ -10,6 +10,16 @@ module Vend
 		return response
   end
 
+  def productAdapter(api_hash, details)
+		conn = 	connect(api_hash)
+		response = conn.post do |req|
+		  req.url '/secured/seamless/products/'
+		  req.headers['hash'] = api_hash
+		  req.body = details.to_json
+		end
+		return response
+	end
+
   def logResponse(response)
     if response.status == 200
       print "Was Successful, Ok"

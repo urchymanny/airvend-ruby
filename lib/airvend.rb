@@ -9,6 +9,7 @@ require 'airvend/base_endpoints.rb'
 require 'airvend/errors.rb'
 require 'airvend/upper_case_string.rb'
 require 'airvend/airvend_objects/airtime.rb'
+require 'airvend/airvend_objects/internet.rb'
 
 Dotenv.load(File.expand_path("../.env", __FILE__))
 
@@ -26,7 +27,7 @@ class Airvend
 
     if (ENV['RAILS_ENV'].nil?)
       @production = production
-      warn "Warning: To ensure your account credentials are safe, It is best to always set your password in the environment variable with AIRVEND_USERNAME & AIRVEND_PASSWORD"
+      warn "Warning: Make sure you set RAILS_ENV to production or development"
     else
       if ENV['RAILS_ENV'] == "production"
         @production=true
