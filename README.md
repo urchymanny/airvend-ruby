@@ -6,6 +6,8 @@ This gem makes it easy for businesses or individuals to implement vending of Air
 
 See [Here](https://documenter.getpostman.com/view/6349852/SVSHrpfv) for Airvend REST API Docs.
 
+To use this resource, you would need to register on the [Airvend B2B](https://business.airvend.ng/) to get access to personal test API Keys or contact me hey@uche.io
+
 ## Installation
 
 Add this line to your application's Gemfile:
