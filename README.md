@@ -179,8 +179,8 @@ payload =  {
 	account: "02188019141", 
 	provider: "aedc",
 	amount: "2000",
-  customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6F166CECA01DE4B58C1100DA3DA87362A6CBD3410E2B7F809C1A33E1AD6756BBA853F4C0275270B398BC69E8AC050E75"
-  }
+  customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6..." # this is gotten from the verify method response above
+}
 ```
 
 next, to process the power purchase, use the method below on the provided payload
