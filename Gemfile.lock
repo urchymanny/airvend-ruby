@@ -2,11 +2,11 @@ PATH
   remote: .
   specs:
     airvend (0.1.0)
-      faraday (= 1.4.1)
-      faraday-detailed_logger (= 2.3.0)
-      httparty (= 0.16.4)
+      faraday
+      faraday-detailed_logger
+      httparty
       json
-      typhoeus (= 1.4.0)
+      typhoeus
 
 GEM
   remote: https://rubygems.org/

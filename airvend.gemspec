@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Uchenna Mba"]
   spec.email         = ["hey@uche.io"]
 
-  spec.summary       = "Write a short summary, because RubyGems requires one."
-  spec.description   = "Write a longer description or delete this line."
+  spec.summary       = "Gem that provides access to bill payment & subscription in Nigeria."
+  spec.description   = "This gem makes it easy for businesses or individuals to implement vending of Airtime, Data, Electricity, Utilities & Television subscriptions to their application"
   spec.homepage      = "https://github.com/urchymanny/airvend-rails"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
@@ -32,11 +32,11 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   spec.add_development_dependency 'dotenv-rails'
   spec.add_development_dependency 'byebug'
-  spec.add_dependency 'httparty', '0.16.4'
+  spec.add_dependency 'httparty'
   spec.add_dependency 'json'
-  spec.add_dependency 'faraday', '1.4.1'
-  spec.add_dependency 'faraday-detailed_logger', '2.3.0'
-  spec.add_dependency 'typhoeus', '1.4.0'
+  spec.add_dependency 'faraday'
+  spec.add_dependency 'faraday-detailed_logger'
+  spec.add_dependency 'typhoeus'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
