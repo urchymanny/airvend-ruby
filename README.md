@@ -171,16 +171,22 @@ To get the customer details, use the `verify` method
 customer = power.verify(payload)
 ````
 
-
+Finally, to purchase power for the verified customer, you would prepare a payload
 
 ```ruby
 payload =  { 
 	ref: "YOUR-OWN-REF-HERE", 
-	account: "08138236694", 
-	provider: "AEDC", # can also be `glo`, `airtel` or `9mobile`
-	amount: "200",
-  customer_number: ""
+	account: "02188019141", 
+	provider: "aedc",
+	amount: "2000",
+  customer_number: "BA36F4AEF88763454678BF9D1A85E4AE6F166CECA01DE4B58C1100DA3DA87362A6CBD3410E2B7F809C1A33E1AD6756BBA853F4C0275270B398BC69E8AC050E75"
 }
+```
+
+next, to process the power purchase, use the method below on the provided payload
+
+```ruby
+power.buy(payload)
 ```
 
 
