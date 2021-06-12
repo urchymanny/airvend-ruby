@@ -32,11 +32,11 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   spec.add_development_dependency 'dotenv-rails'
   spec.add_development_dependency 'byebug'
-  spec.add_dependency 'httparty'
-  spec.add_dependency 'json'
-  spec.add_dependency 'faraday'
-  spec.add_dependency 'faraday-detailed_logger'
-  spec.add_dependency 'typhoeus'
+  spec.add_dependency 'httparty', '~> 0.18'
+  spec.add_dependency 'json', '~> 2.5'
+  spec.add_dependency 'faraday', '~> 1.4'
+  spec.add_dependency 'faraday-detailed_logger', '~> 2.3'
+  spec.add_dependency 'typhoeus', '~> 1.4'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

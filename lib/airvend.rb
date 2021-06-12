@@ -39,7 +39,7 @@ class Airvend
     end
 
     # set rave url to sandbox or live if we are in production or development
-    if production == false
+    if ENV['RAILS_ENV'] == "development" || ENV['RAILS_ENV'].nil?
         @url = sandbox_url
     else
         @url = live_url

@@ -13,7 +13,7 @@ To use this resource, you would need to register on the [Airvend B2B](https://bu
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'airvend'
+gem 'airvend', "~> 0.1.2"
 ```
 
 And then execute:
@@ -79,9 +79,9 @@ To purchase airtime for a phone number that is registered with any of the NCC li
 First, we need to provide the required data in the payload
 
 ```ruby
-payload =  { 
-	ref: "YOUR-OWN-REF-HERE", 
-	phone: "08138236694", 
+payload =  {
+	ref: "YOUR-OWN-REF-HERE",
+	phone: "08138236694",
 	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
 	amount: "200"
 }
@@ -123,9 +123,9 @@ This return an array of hashes with each containing a data plan in the format
 [
   ...
   {
-    :description=>"350MB", 
-    :amount=>"300", 
-    :code=>"300", 
+    :description=>"350MB",
+    :amount=>"300",
+    :code=>"300",
     :validity=>" for 7 Days"
 	}
   ...
@@ -139,11 +139,11 @@ This return an array of hashes with each containing a data plan in the format
 Next, you can proceed to purchase the selected internet data plan with the payload
 
 ```ruby
-payload =  { 
-	ref: "YOUR-OWN-REF-HERE", 
-	phone: "08138236694", 
+payload =  {
+	ref: "YOUR-OWN-REF-HERE",
+	phone: "08138236694",
 	mno: "mtn", # can also be `glo`, `airtel` or `9mobile`
-	code: "200" # this is code from the selected internet data plan from the list of data plans 
+	code: "200" # this is code from the selected internet data plan from the list of data plans
   }
 ```
 
@@ -211,12 +211,12 @@ which returns:
 
 &nbsp;
 
-Finally, to purchase power for the verified customer, you would prepare a payload using the customer number that is gotten from the `verify` method 
+Finally, to purchase power for the verified customer, you would prepare a payload using the customer number that is gotten from the `verify` method
 
 ``` ruby
 payload =  {
 	ref: "YOUR-OWN-REF-HERE",
-	account: "02188019141", 
+	account: "02188019141",
 	provider: "aedc",
 	amount: "2000",
 	customernumber:"BA36F4AEF88763454678BF9D1A85E4AE6F166CECA01DE4B58C1100DA3DA87362A6CBD3410E2B7F809C1A33E1AD6756BBA853F4C0275270B398BC69E8AC050E75|eyJwcm9kdWN0IjoiUE9SVEhBUkNPVVJURUxFQ1RSSUNJVFkiLCJ0eXBlIjoiUFJFUEFJRCIsImFjY291bnQiOiIwMTI0MDAxMjQ3Njk5IiwibmFtZSI6IkVzIE9tYWNoaSIsImFkZHJlc3MiOiJOTyA2NSBXb2ppIFJkIE5PIDY1IFdvamkgUmQiLCJ0YXJyaWYiOiJSMiIsImFycmVhcnMiOiIwIiwicGhvbmUiOiIiLCJtZXRlck51bWJlciI6IjAxMjQwMDEyNDc2OTkiLCJjdXN0b21lck51bWJlciI6IjgxNDE3MDIyODMwMSIsInRvdGFsQmlsbCI6IjAiLCJpYmNOYW1lIjoiR2FyZGVuIENpdHkgSW5kdXN0cmlhbCIsImJzY05hbWUiOiJSdW11b2diYSJ9" #data contained in the response from verify customer method
@@ -288,7 +288,7 @@ This return an array of hashes with each containing a tv plans in the format
   ...
   {
     :description=>"DStv Compact",
-    :amount=> "7900", 
+    :amount=> "7900",
     :code=>"COMPE36"
 	}
   ...
@@ -297,12 +297,12 @@ This return an array of hashes with each containing a tv plans in the format
 
 &nbsp;
 
-Finally, to subscribe to a tv plan for the verified customer, you would prepare a payload using the customer 
+Finally, to subscribe to a tv plan for the verified customer, you would prepare a payload using the customer
 
 ``` ruby
 payload =  {
 	ref: "YOUR-OWN-REF-HERE",
-	account: "02188019141", 
+	account: "02188019141",
 	provider: "aedc",
   account_type: "prepaid",
 	amount: "2000",
@@ -343,4 +343,3 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Airvend project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/urchymanny/airvend-rails/blob/master/CODE_OF_CONDUCT.md).
-
