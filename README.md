@@ -225,7 +225,7 @@ The `customernumber` is contained in the response from the `verify` method
 
 &nbsp;
 
-next, to process the power purchase, use the method below on the provided payload
+Next, to process the power purchase, use the method below on the provided payload
 
 ```ruby
 power.buy(payload)
@@ -317,6 +317,10 @@ tv.buy(payload)
 ```
 
 &nbsp;
+
+## Transactions
+
+#### NOTE: This is currently not available.
 
 &nbsp;
 
