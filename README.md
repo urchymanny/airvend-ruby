@@ -179,7 +179,7 @@ payload =  {
 	account: "02188019141", 
 	provider: "aedc",
 	amount: "2000",
-	customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6..."
+	customer_number:"BA36F4AEF88763454678BF9D1A85E4AE6..." #data contained in the response from verify customer method
 }
 ```
 
