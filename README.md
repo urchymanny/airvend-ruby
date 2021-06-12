@@ -141,6 +141,50 @@ internet.buy(payload)
 
 To vend Electricity Bills, you need to instantiate the `Power` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
 
+```ruby
+power = Vend::Power.new(airvend)
+```
+
+Before paying for electricity bills, it's important to confirm the customers details before proceeding
+
+```ruby
+payload = {
+  account: "45701113131", #this is the customers meter number
+  provider: "aedc",
+  account_type: "prepaid" # can also be "postpaid"
+}
+```
+
+the following providers are supported:
+
+- `aedc` for Abuja Electricity Distribution Company
+- `ie` for Ikeja Electricity
+- `eko` for Eko Distribution
+- `phed` for Port Harcourt Electricity Distribution
+- `eedc` for Enugu Electricity Distribution Company
+- `kedco` for Kaduna Electricity Distribution Company
+- `ibedc` for Ibadan Electricity Distribution Company
+
+To get the customer details, use the `verify` method
+
+````ruby
+customer = power.verify(payload)
+````
+
+
+
+```ruby
+payload =  { 
+	ref: "YOUR-OWN-REF-HERE", 
+	account: "08138236694", 
+	provider: "AEDC", # can also be `glo`, `airtel` or `9mobile`
+	amount: "200",
+  customer_number: ""
+}
+```
+
+
+
 ##  # coming soon
 
 

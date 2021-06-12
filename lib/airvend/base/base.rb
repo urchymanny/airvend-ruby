@@ -15,34 +15,6 @@ class Base
     return conn
   end
 
-  def mno_id(mno)
-    if mno == "mtn"
-      2
-    elsif mno == "airtel"
-      1
-    elsif mno == "glo"
-      3
-    elsif mno == "9mobile"
-      4
-    else
-      raise AirvendInvalidProvider, "Invalid Mobile Network Operator, mno can only be 'mtn', 'glo', 'airtel' or '9mobile'"
-    end
-  end
-
-  def provider_id(mno)
-    case mno
-    when "mtn"
-      2
-    when "airtel"
-      1
-    when "glo"
-      3
-    when "9mobile"
-      4
-    else
-      raise AirvendInvalidProvider, "Invalid Mobile Network Operator, mno can only be 'mtn', 'glo', 'airtel' or '9mobile'"
-    end
-  end
 
   def produce_error(response)
     status = response.status
@@ -95,5 +67,98 @@ class Base
       end
       hash
 		end
+  end
+
+  def verify_customer(product_type, account_id)
+		params_hash = { 'type'=> product_type, 'account'=> account_id }
+		details = {}
+		details.merge!({ 'details'=>params_hash })
+		api_hash = @airvendObj.hash_req(details)
+		begin
+			response = verifyAdapter(api_hash, details)
+		rescue
+			return response
+		else
+			if response.status == 200
+        hash = rename_hash(JSON.parse(response.body, { symbolize_names: true }))
+        rename_hash(hash[:details])
+        hash
+      else
+        produce_error(response)
+			end
+		end
+	end
+
+  def mno_id(mno)
+    if mno == "mtn"
+      2
+    elsif mno == "airtel"
+      1
+    elsif mno == "glo"
+      3
+    elsif mno == "9mobile"
+      4
+    else
+      raise AirvendInvalidProvider, "Invalid Mobile Network Operator, mno can only be 'mtn', 'glo', 'airtel' or '9mobile'"
+    end
+  end
+
+  def provider_id(mno)
+    case mno
+    when "mtn"
+      2
+    when "airtel"
+      1
+    when "glo"
+      3
+    when "9mobile"
+      4
+    else
+      raise AirvendInvalidProvider, "Invalid Mobile Network Operator, mno can only be 'mtn', 'glo', 'airtel' or '9mobile'"
+    end
+  end
+
+  def power_id(account, account_type)
+    x = account.upcase
+    y = account_type.upcase
+    if x == "IE"
+      if y == "POSTPAID"
+        return "10"
+      elsif y == "PREPAID"
+        return "11"
+      end
+    elsif x == "EKO"
+      if y == "POSTPAID"
+        return "13"
+      elsif y == "PREPAID"
+        return "14"
+      end
+    elsif x == "PHED"
+      if y == "POSTPAID"
+        return "15"
+      elsif y == "PREPAID"
+        return "16"
+      end
+    elsif x == "EEDC"
+      if y == "POSTPAID"
+        return "22"
+      elsif y == "PREPAID"
+        return "21"
+      end
+    elsif x == "KEDCO"
+      return "20"
+    elsif x == "AEDC"
+      if y == "POSTPAID"
+        return "25"
+      elsif y == "PREPAID"
+        return "24"
+      end
+    elsif x == "IBEDC"
+      if y == "POSTPAID"
+        return "12"
+      elsif y == "PREPAID"
+        return "11"
+      end
+    end
   end
 end

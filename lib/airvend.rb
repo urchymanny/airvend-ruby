@@ -10,6 +10,8 @@ require 'airvend/errors.rb'
 require 'airvend/upper_case_string.rb'
 require 'airvend/airvend_objects/airtime.rb'
 require 'airvend/airvend_objects/internet.rb'
+require 'airvend/airvend_objects/power.rb'
+require 'airvend/airvend_objects/television.rb'
 
 Dotenv.load(File.expand_path("../.env", __FILE__))
 
