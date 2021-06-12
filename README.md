@@ -93,7 +93,7 @@ Next, we call the method to process the airtime purchase as shown below
 airtime.buy(payload)
 ```
 
-
+&nbsp;
 
 ## Internet Data Vending
 
@@ -153,7 +153,7 @@ then we can proceed to make subscription after charging customer or your app use
 internet.buy(payload)
 ```
 
-
+&nbsp;
 
 ## Electricity Vending
 
@@ -218,6 +218,8 @@ next, to process the power purchase, use the method below on the provided payloa
 ```ruby
 power.buy(payload)
 ```
+
+&nbsp;
 
 ## TV Vending
 
