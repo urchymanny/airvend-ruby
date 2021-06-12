@@ -137,10 +137,6 @@ internet.buy(payload)
 
 
 
-##  # coming soon
-
-
-
 ## Electricity Vending
 
 To vend Electricity Bills, you need to instantiate the `Power` Class with the [`airvend`](#instantiate-airvend-object-in-sandbox-with-environment-variable) object
