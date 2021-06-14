@@ -34,7 +34,7 @@ class Airvend
       if ENV['RAILS_ENV'] == "production"
         @production=true
       else
-        @prodcution=false
+        @production=false
       end
     end
 

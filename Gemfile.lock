@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    airvend (0.1.1)
+    airvend (0.1.2)
       faraday (~> 1.4)
       faraday-detailed_logger (~> 2.3)
       httparty (~> 0.18)
